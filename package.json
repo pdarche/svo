@@ -1,0 +1,26 @@
+{
+  "name": "svo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "d3": "^4.11.0",
+    "hat": "0.0.3",
+    "lodash": "^4.17.4",
+    "next": "^4.1.2",
+    "pouchdb-browser": "^6.3.4",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-ga": "^2.3.5",
+    "react-modal": "^3.0.4",
+    "survey-react": "^0.12.34"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "",
+  "license": "ISC"
+}
