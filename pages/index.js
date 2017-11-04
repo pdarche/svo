@@ -7,9 +7,6 @@ import { styles } from "../styles/index";
 export default class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    if (process.browser) {
-      //this.db = new PouchDB('response');
-    }
   }
 
   render() {
