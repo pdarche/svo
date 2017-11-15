@@ -120,7 +120,6 @@ export default class Survey extends React.Component {
   }
 
   onSlide = val => {
-    // Push the event to the events array
     this.events.push({
       _id: hat(),
       question: this.state.question,
