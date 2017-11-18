@@ -1,6 +1,7 @@
 import React from "react";
 import PouchDB from "pouchdb-browser";
 //import ReactGA from 'react-ga'
+import Meta from "../components/Meta";
 import Nav from "../components/Nav";
 import Results from "../components/Results";
 import { ANALYTICS_TRACKING_ID, FIREBASE_URL } from '../config'
@@ -50,7 +51,7 @@ export default class ResultsPage extends React.Component {
         return fetch(FIREBASE_URL, {
             method: 'POST',
             body: JSON.stringify(doc)
-        })        
+        }) 
       })
       .then((res) => {
         this.db.destroy()
@@ -67,6 +68,7 @@ export default class ResultsPage extends React.Component {
         <style jsx>
           {styles}
         </style>
+        <Meta />
         <Nav />
         <div className="results">
           <div className="content">

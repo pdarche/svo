@@ -13,7 +13,7 @@ export const styles = css`
     margin: 0px auto;
   }
 
-  button {
+ .button {
     border: 1px solid #333;
     width: 140px;
     height: 30px;
@@ -21,7 +21,7 @@ export const styles = css`
     border-radius: 5px;
   }
 
-  button:hover {
+  .button:hover {
     background-color: #ccc;
     cursor: pointer
   }

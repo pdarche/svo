@@ -20,7 +20,7 @@ export const styles = css`
   }
 
   .bar-container2 .bar {
-    fill: #3b5998;
+    fill: #4A6FA5
   }
 
   .bar-container2 .label {
