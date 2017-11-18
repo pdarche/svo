@@ -4,7 +4,7 @@ export const styles = css`
   .container {
     display: flex;
     justify-content: center;
-    margin: 20px 0px;
+    margin: 0px 0px;
   }
 
   .ticks, .label {

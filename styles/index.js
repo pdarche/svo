@@ -13,7 +13,12 @@ export const styles = css`
     width: 500px;
     font: 35px sans-serif;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    color: #2C3C43
+  }
+
+  .title-span {
+    font-size: 20px;
   }
 
   .description {
@@ -21,16 +26,12 @@ export const styles = css`
     width: 500px;
   }
 
-  p {
-    font: 16px sans-serif;
-  }
-
   .button {
     width: 200px;
     height: 50px;
     font: 14px sans-serif;
     color: white;
-    background-color: #3b5998;
+    background: #4A6FA5
     display: flex;
     flex-direction: column;
     justify-content: center;

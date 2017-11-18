@@ -50,7 +50,6 @@ export default class Bar extends React.Component {
       .attr("y", function(d, i) {
         return 45 * i;
       })
-      .style("fill", "#3b5998");
 
     let scale = barContainer
       .insert("g", ".bar-container:first-child")

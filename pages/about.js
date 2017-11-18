@@ -1,4 +1,5 @@
 import React from "react";
+import Meta from "../components/Meta";
 import Nav from "../components/Nav";
 import Survey from "../components/Survey";
 import { styles } from "../styles/about";
@@ -14,6 +15,7 @@ export default class SurveyPage extends React.Component {
         <style jsx>
           {styles}
         </style>
+        <Meta />
         <div className="about-container">
           <Nav />
           <div className="content">

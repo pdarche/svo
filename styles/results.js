@@ -49,7 +49,7 @@ export const styles = css`
   }
   
   .survey-info p {
-    font-size: 10;
+    font-size: 12px;
     color: #333
   }
 `

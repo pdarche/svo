@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import ReactModal from "react-modal";
+import Meta from "../components/Meta";
 import Nav from "../components/Nav";
 import Survey from "../components/Survey";
 import { ANALYTICS_TRACKING_ID, SURVEY_ACTIVE, SURVEY_JSON } from "../config";
@@ -80,7 +81,7 @@ export default class SurveyPage extends React.Component {
           you've adjusted the slider to your preferred allocation press the
           Submit button.
         </p>
-        <div className="button" onClick={this.handleAcknowledgement}>Got it!</div>
+        <div className="btn btn-primary" onClick={this.handleAcknowledgement}>Got it!</div>
       </div>
     );
   }
@@ -93,9 +94,7 @@ export default class SurveyPage extends React.Component {
 
     return (
       <div>
-        <Head>
-          <link jsx href="/static/bootstrap.min.css" rel="stylesheet" />
-        </Head>
+        <Meta />
         <div className="survey-page-container">
         <style jsx>{ styles }</style>
           <Nav />

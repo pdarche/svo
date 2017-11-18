@@ -23,15 +23,16 @@ export const styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #333;
+    margin-top: 5px;
     width: 140px;
     height: 30px;
-    background-color: white;
+    //border: 1px solid #333;
     border-radius: 5px;
   }
 
   .button:hover {
-    background-color: #ccc;
+    background-color: white;
+    color: #333;
     cursor: pointer
   }
 

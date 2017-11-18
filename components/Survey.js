@@ -207,7 +207,7 @@ export default class Survey extends React.Component {
             reset={this.state.reset}
             handleSlide={this.onSlide}
           />
-          <button onClick={this.handleClick}>Submit</button>
+          <button className="btn btn-primary" onClick={this.handleClick}>Submit</button>
         </div>
       </div>
     );

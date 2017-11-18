@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import PouchDB from "pouchdb-browser";
 import Nav from "../components/Nav";
+import Meta from "../components/Meta"
 import { styles } from "../styles/index";
 
 export default class IndexPage extends React.Component {
@@ -15,14 +16,15 @@ export default class IndexPage extends React.Component {
         <style jsx>
           {styles}
         </style>
+        <Meta />
         <Nav />
         <div className="container">
-          <h1>What's your Social Value Orientation?</h1>
+          <h1><span className="title-span">What's your</span><br/>Social Value Orientation?</h1>
           <div className="description">
             <p>
               We all relate to people a little differently. Some like to put
               others before themselves. Some enjoy coming out on top in
-              competition. And others fall somewhere in between. The&nbsp;
+              competition. And others fall somewhere in between. The &nbsp;
               <strong>
                 <a
                   target="_blank"
@@ -31,8 +33,7 @@ export default class IndexPage extends React.Component {
                   social value orientation
                 </a>
               </strong>
-              &nbsp;is a measure of where we fall on this scale from competitive to
-              altruistic.
+              &nbsp;is a measure of where we fall on this scale from competitive to altruistic.
             </p>
             <p>
               The next page contains the tasks that make up the SVO. Your job is
@@ -45,9 +46,9 @@ export default class IndexPage extends React.Component {
               survey!
             </p>
           </div>
-          <div className="button">
+          <div>
             <Link prefetch href="/survey">
-              <a>Go to the survey!</a>
+              <a className="btn btn-primary">Go to the survey!</a>
             </Link>
           </div>
         </div>

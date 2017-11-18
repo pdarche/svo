@@ -1,0 +1,30 @@
+body { 
+  /*
+  see color scheme at: https://coolors.co/2c3c43-c0d6df-f7fafb-4a6fa5-166088
+  background: #F8FBFB;
+  background: #EBF3F5;
+  */
+  background: #F1F7F8;
+  color: #2C3C43;
+}
+
+.nav a {
+  color: #4A6FA5;
+}
+
+.nav a:visited {
+  color: #166088;  
+}
+
+.button {
+  background-color: #4A6FA5
+  color: white; 
+}
+
+.btn-primary {
+  background-color: #4A6FA5
+}
+
+p {
+  font: 18px sans-serif;
+}
