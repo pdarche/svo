@@ -120,10 +120,12 @@ export default class SurveyPage extends React.Component {
 }
 
 const content = {
+  display: "flex",
+  justifyContent: "center",
   position: "",
-  width: "450px",
-  height: "500px",
-  font: "18px sans-serif"
+  width: "500px",
+  font: "18px sans-serif",
+  border: "0px"
 };
 
 const overlay = {
