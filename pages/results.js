@@ -57,7 +57,7 @@ export default class ResultsPage extends React.Component {
       .then((res) => {
         this.db.destroy()
         window.localStorage.removeItem("sessionId")
-        //this.setState({synced: true})
+        this.setState({synced: true})
       })
       .catch(err => console.log(err));
 

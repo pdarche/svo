@@ -29,19 +29,21 @@ module.exports = {
     title: "A few quick questions before we begin...",
     showProgressBar: "top",
     pages: [{
+      // Demographics
       questions: [
-        {type: "dropdown", name: "gender", title: "What is your gender?", choices: ["Female", "Male"], hasOther: true, isRequired: true},
-        {type: "dropdown", name: "race", title: "Which race/ethnicity best describes you?",
+        {type: "dropdown", name: "sex", title: "What is your sex?", choices: ["Female", "Male"], hasOther: true, isRequired: true},
+        {type: "dropdown", name: "race", title: "Which race best describes you?",
             choices: ["Black or African American", "American Indian or Alaskan Native", "Asian", "Native Hawiian or other Pacific Islander", "White / Caucasian"], hasOther: true, isRequired: true},
         {type: "text", name: "age", inputType:"number", title: "What year were you born?", isRequired: true}
       ]
     }, {
-      // Education and income
+      // Education, income, marital status
       questions: [
         {name: "education", type: "dropdown", title: "What's the highest degree or level of school you have completed?",
             choices: ["Less than a high school degree", "High school degree or equivalent (e.g. GED)", "Some college but no degree", "Associate degree", "Bachelor degree", "Master's degree", "Ph.D."], isRequired: true},
         {name: "income", type: "dropdown", title: "How much did all members of your household earn last year?",
-            choices: ["Less than $10,000", "$10,000 to $19,999", "$20,000 to $29,999", "$30,000 to $39,999", "$40,000 to $49,999", "$50,000 to $59,999", "$60,000 to $69,999", "$70,000 to $79,999", "$80,000 to $89,999", "$90,000 to $99,999", "$100,000 to $149,999", "More than $150,000", "Prefer not to answer"], isRequired: true}
+            choices: ["Less than $10,000", "$10,000 to $19,999", "$20,000 to $29,999", "$30,000 to $39,999", "$40,000 to $49,999", "$50,000 to $59,999", "$60,000 to $69,999", "$70,000 to $79,999", "$80,000 to $89,999", "$90,000 to $99,999", "$100,000 to $149,999", "More than $150,000", "Prefer not to answer"], isRequired: true},
+        {name: "maritalStatus", type: "dropdown", title: "What is your marital status?", choices: ["Married", "Widowed", "Devorced", "Separated", "Never married"], isRequired: true}
       ]
     }, {
       // Political leaning, religiosity
@@ -55,9 +57,9 @@ module.exports = {
     }, {
       // Family and early childhood experience, relationships
       questions: [
-        {name: "relationship-development", type: "rating", "title": "How easy is it for you to get close to others?", mininumRateDescription: "Very difficult", maximumRateDescription: "Very easy", isRequired: true},
-        {name: "trust-development", type: "rating", "title": "How easy is it for you to trust others?", mininumRateDescription: "Very difficult", maximumRateDescription: "Very easy", isRequired: true},
-        {name: "dependence-development", type: "rating", "title": "How easy is it for you to depend on others?", mininumRateDescription: "Very difficult", maximumRateDescription: "Very easy", isRequired: true}
+        {name: "relationshipDevelopment", type: "rating", "title": "How easy is it for you to get close to others?", mininumRateDescription: "Very difficult", maximumRateDescription: "Very easy", isRequired: true},
+        {name: "trustDevelopment", type: "rating", "title": "How easy is it for you to trust others?", mininumRateDescription: "Very difficult", maximumRateDescription: "Very easy", isRequired: true},
+        {name: "dependenceDevelopment", type: "rating", "title": "How easy is it for you to depend on others?", mininumRateDescription: "Very difficult", maximumRateDescription: "Very easy", isRequired: true}
       ]
     }, {
       questions: [
