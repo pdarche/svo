@@ -4,7 +4,8 @@ import ReactModal from "react-modal";
 import Meta from "../components/Meta";
 import Nav from "../components/Nav";
 import Survey from "../components/Survey";
-import { ANALYTICS_TRACKING_ID, SURVEY_ACTIVE, SURVEY_JSON } from "../config";
+
+import { ANALYTICS_TRACKING_ID, INCLUDE_SURVEY, SURVEY_JSON } from "../config";
 import { styles } from '../styles/survey';
 
 
@@ -18,7 +19,7 @@ export default class SurveyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      survey: SURVEY_ACTIVE,
+      survey: INCLUDE_SURVEY,
       demoComplete: false,
       acknowledged: false,
       loadSurvey: false
@@ -30,7 +31,7 @@ export default class SurveyPage extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ loadSurvey: true });
+    this.setState({loadSurvey: true});
   }
 
   handleRequestClose = ev => {
@@ -42,7 +43,10 @@ export default class SurveyPage extends React.Component {
   };
 
   handleDemoSurveyCompletion = survey => {
-    window.localStorage.setItem("demoSurvey", JSON.stringify(survey.data));
+    window.localStorage.setItem(
+      "demoSurvey",
+      JSON.stringify(survey.data)
+    );
     this.setState({ demoComplete: true });
   };
 
@@ -55,8 +59,8 @@ export default class SurveyPage extends React.Component {
       ? <SurveyForm.Survey
           model={this.model}
           css={{ navigationButton: "btn btn-sm" }}
-          onComplete={this.handleDemoSurveyCompletion}
-        /> : null;
+          onComplete={this.handleDemoSurveyCompletion} />
+      : null;
   }
 
   generateIntro() {
@@ -89,7 +93,7 @@ export default class SurveyPage extends React.Component {
   render() {
     let survey = this.generateSurvey();
     let modal = !this.state.demoComplete && this.state.survey
-      ? this.generateDemoSurvey() : !this.state.acknowledged 
+      ? this.generateDemoSurvey() : !this.state.acknowledged
       ? this.generateIntro() : null;
 
     return (
