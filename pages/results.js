@@ -7,6 +7,7 @@ import Results from "../components/Results";
 import { ANALYTICS_TRACKING_ID, FIREBASE_URL } from '../config'
 import { styles } from "../styles/results";
 
+
 export default class ResultsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -49,14 +50,14 @@ export default class ResultsPage extends React.Component {
       .then(doc => {
         // Sync the results and then destroy the data
         return fetch(FIREBASE_URL, {
-            method: 'POST',
-            body: JSON.stringify(doc)
-        }) 
+          method: 'POST',
+          body: JSON.stringify(doc)
+        })
       })
       .then((res) => {
         this.db.destroy()
         window.localStorage.removeItem("sessionId")
-        this.setState({synced: true})
+        //this.setState({synced: true})
       })
       .catch(err => console.log(err));
 

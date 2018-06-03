@@ -39,7 +39,7 @@ export default class Results extends React.Component {
     chart
       .append("g")
       .attr("class", "axis axis--x")
-      .attr("transform", "translate(0, " + dims.height + ")")
+      .attr("transform", `translate(0, ${dims.height})`)
       .call(xAxis.tickSizeInner(-dims.height));
 
     chart
@@ -95,7 +95,6 @@ export default class Results extends React.Component {
       .attr("x2", scales.x(49))
       .attr("y1", 0)
       .attr("y2", 0)
-      .attr("transform-origin", "left")
       .attr(
         "transform",
         "translate(" + scales.x(50) + ", " + scales.y(50) + ") rotate(0)"
@@ -173,7 +172,6 @@ export default class Results extends React.Component {
 
   _scales(dims) {
     let x = d3.scaleLinear().domain([0, 100]).range([0, dims.width]);
-
     let y = d3.scaleLinear().domain([0, 100]).range([dims.width, 0]);
 
     return { x, y };
