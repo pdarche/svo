@@ -14,6 +14,7 @@ import {
   MAX_DISTANCES,
   QUESTIONS
 } from "../config";
+
 import {
   centerPoint,
   classifySVO,
@@ -22,12 +23,41 @@ import {
 } from "../utils";
 import { styles } from "../styles/surveyComponent";
 
+
+function createAnswer(state) {
+  const submitTime = new Date();
+  return {
+    _id: hat(),
+    sessionId: state.sessionId,
+    self: state.date[0],
+    other: state.data[1],
+    startedAt: state.startTime,
+    submittedAt: submitTime,
+    responseTime: submitTime - state.startTime,
+    ranges: state.ranges
+  }
+}
+
+function createEvent(category, type) {
+  return {
+    _id: hat(),
+    occuredAt: new Date(),
+    category: category,
+    type: type,
+    properties: properties
+  }
+}
+
+
+
 export default class Survey extends React.Component {
   constructor(props) {
     super(props);
+
     if (process.browser) {
       this.db = new PouchDB("response");
     }
+
     this.events = new Array();
     this.state = {
       saving: false,
@@ -49,6 +79,7 @@ export default class Survey extends React.Component {
   createSession(demoSurvey) {
     let id = hat();
     window.localStorage.setItem("sessionId", id);
+
     this.db.put({
       _id: id,
       demoSurvey: demoSurvey,
@@ -56,6 +87,7 @@ export default class Survey extends React.Component {
       startedAt: new Date(),
       events: new Array()
     });
+
     // Set the start time for the first question
     this.setState({
       sessionId: id,
@@ -64,18 +96,7 @@ export default class Survey extends React.Component {
   }
 
   saveAnswer() {
-    let submitTime = new Date();
-    let answer = {
-      _id: hat(),
-      sessionId: this.state.sessionId,
-      self: this.state.data[0],
-      other: this.state.data[1],
-      question: this.state.question,
-      startTime: this.state.startTime,
-      submitTime: submitTime,
-      resonseTime: submitTime - this.state.startTime,
-      ranges: this.state.ranges
-    };
+    let answer = createAnswer(this.state);
     return this.db
       .get(this.state.sessionId)
       .then(doc => {
@@ -120,39 +141,28 @@ export default class Survey extends React.Component {
   }
 
   onSlide = val => {
-    this.events.push({
-      _id: hat(),
-      question: this.state.question,
-      sessionId: this.state.sessionId,
-      category: "Survey",
-      type: "Moved Slider",
-      occuredAt: new Date(),
+    const event_ = createEvent("survey", "slider.moved", {
       selfStart: this.state.data[0],
       self: val[0],
       otherStart: this.state.data[1],
       other: val[1]
     });
+
+    this.events.push(event_);
     this.setState({ data: val, reset: false });
   };
 
   onInstructionEvent = type => {
-    this.events.push({
-      _id: hat(),
-      question: this.state.question,
-      sessionId: this.state.sessionId,
-      category: "Survey",
-      type: type,
-      value: null,
-      occuredAt: new Date()
-    });
-  };
+    const event_ = createEvent("survey", type, { question: this.state.question });
+    this.events.push(event_);
+  }
 
   handleClick = ev => {
     ev.preventDefault();
     this.saveAnswer().then(doc => {
       this.nextAction();
     });
-  };
+  }
 
   nextAction = () => {
     let nextQuestion = this.state.question + 1;
@@ -182,7 +192,7 @@ export default class Survey extends React.Component {
         })
         .catch(e => console.log(e));
     }
-  };
+  }
 
   render() {
     return (

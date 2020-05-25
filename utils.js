@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { 
+import {
   EQUALITY_POINTS,
   JOINT_GAIN_POINTS,
   OTHER_GAIN,
@@ -29,8 +29,8 @@ function classifySVO(svo) {
 
 
 function computeSVO(selfTotal, otherTotal) {
-  let selfAvg = (selfTotal / 6) - 50 
-  let otherAvg = (otherTotal / 6) - 50 
+  let selfAvg = (selfTotal / 6) - 50
+  let otherAvg = (otherTotal / 6) - 50
   let ratio = otherAvg / selfAvg
   let svo = Math.atan(ratio) * 180 / Math.PI
   return svo
@@ -39,8 +39,8 @@ function computeSVO(selfTotal, otherTotal) {
 
 function computeSecondaryType(answers) {
   let secondaryMeasures = answers.map((answer, ix) => {
-    let dia = Math.abs(answer.self - EQUALITY_POINTS[ix]) / MAX_DISTANCES[ix]  
-    let djg = JOINT_GAIN_POINTS[ix]  
+    let dia = Math.abs(answer.self - EQUALITY_POINTS[ix]) / MAX_DISTANCES[ix]
+    let djg = JOINT_GAIN_POINTS[ix]
       ? Math.abs(answer.self - JOINT_GAIN_POINTS[ix]) / MAX_DISTANCES[ix]
       : 0
     let dal = Math.abs(answer.self - OTHER_GAIN[ix]) / MAX_DISTANCES[ix]
@@ -59,6 +59,11 @@ function computeSecondaryType(answers) {
   return {ia, dia, djg, dal, dic}
 }
 
-export { centerPoint, classifySVO, computeSVO, computeSecondaryType }
+export {
+  centerPoint,
+  classifySVO,
+  computeSVO,
+  computeSecondaryType
+}
 
 

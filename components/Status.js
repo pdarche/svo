@@ -18,7 +18,7 @@ export default class Status extends React.Component {
       category: "User",
       action: "Opened the help instructions"
     });
-    this.props.onInstructionEvent("Opened help instructions");
+    this.props.onInstructionEvent("instructions.opened");
     this.setState({ info: true });
   }
 
@@ -27,13 +27,13 @@ export default class Status extends React.Component {
       category: "User",
       action: "Closed the help instructions"
     });
-    this.props.onInstructionEvent("Closed help instructions");
+    this.props.onInstructionEvent("instructions.closed");
     this.setState({ info: false });
   }
 
   generateModal() {
     return (
-      <div> 
+      <div>
         <p>
           Below, you see a slider. You can change the slider to adjust the
           amount of money you and the other person will receive.
@@ -46,7 +46,7 @@ export default class Status extends React.Component {
           Once you have moved the slider to the distribution you most prefer
           press the Submit button.
         </p>
-      </div> 
+      </div>
     )
   }
 
