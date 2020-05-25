@@ -6,6 +6,7 @@ import Nav from "../components/Nav";
 import Results from "../components/Results";
 import { ANALYTICS_TRACKING_ID, FIREBASE_URL } from '../config'
 import { styles } from "../styles/results";
+import { Database } from "../utils";
 
 
 export default class ResultsPage extends React.Component {
@@ -16,51 +17,37 @@ export default class ResultsPage extends React.Component {
       type: "(computing)",
       sessionId: null
     };
+
     if (process.browser) {
-      this.db = new PouchDB("response");
+      this.db = new Database(window);
     }
   }
 
   componentDidMount() {
-    let sessionId = window.localStorage.getItem("sessionId");
-    let browser = JSON.parse(window.localStorage.getItem("browser"));
-    let ip = window.localStorage.getItem("ip");
+    const sessionId = window.localStorage.getItem("sessionId");
 
     if (!sessionId) {
-      let res = confirm("Sorry, you must take the survey before reviewing results")
+      confirm("Sorry, you must take the survey before reviewing results")
       window.location = "/survey"
     }
 
-    // Get the SVO score and update the local db
-    this.db
-      .get(sessionId)
+    // Get the SVO score to show the user
+    let doc = this.db.getResponse(sessionId)
       .then(doc => {
+        console.log(doc)
         this.setState({
           svo: Math.round(doc.svo),
           type: doc.type,
           sessionId: sessionId
         });
-        doc.browser = browser;
-        doc.ip = ip;
-        return this.db.put(doc);
       })
-      .then((res) => {
-        return this.db.get(sessionId)
+      .then(res => {
+        return this.db.sync(sessionId);
       })
-      .then(doc => {
-        // Sync the results and then destroy the data
-        return fetch(FIREBASE_URL, {
-          method: 'POST',
-          body: JSON.stringify(doc)
-        })
-      })
-      .then((res) => {
-        this.db.destroy()
-        window.localStorage.removeItem("sessionId")
-        this.setState({synced: true})
+      .then(res => {
+        return this.db.destroy(window);
       })
       .catch(err => console.log(err));
-
   }
 
   render() {
@@ -93,3 +80,4 @@ export default class ResultsPage extends React.Component {
     );
   }
 }
+

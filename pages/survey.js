@@ -5,7 +5,10 @@ import Meta from "../components/Meta";
 import Nav from "../components/Nav";
 import Survey from "../components/Survey";
 
-import { ANALYTICS_TRACKING_ID, INCLUDE_SURVEY, SURVEY_JSON } from "../config";
+import {
+  INCLUDE_SURVEY,
+  SURVEY_JSON
+} from "../config";
 import { styles } from '../styles/survey';
 
 
@@ -31,24 +34,21 @@ export default class SurveyPage extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({loadSurvey: true});
+    this.setState({ loadSurvey: true });
   }
 
   handleRequestClose = ev => {
     // Disallow closing by clicking off
-  };
+  }
 
   handleAcknowledgement = ev => {
     this.setState({ acknowledged: true });
-  };
+  }
 
   handleDemoSurveyCompletion = survey => {
-    window.localStorage.setItem(
-      "demoSurvey",
-      JSON.stringify(survey.data)
-    );
+    window.localStorage.setItem("preSurvey", JSON.stringify(survey.data));
     this.setState({ demoComplete: true });
-  };
+  }
 
   generateSurvey() {
     return this.state.acknowledged ? <Survey /> : null;

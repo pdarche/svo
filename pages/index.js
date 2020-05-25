@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import PouchDB from "pouchdb-browser";
 import Nav from "../components/Nav";
 import Meta from "../components/Meta"
 import { styles } from "../styles/index";
