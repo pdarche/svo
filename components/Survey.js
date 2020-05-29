@@ -15,6 +15,7 @@ import {
 
 import {
   Database,
+  Actions,
   createEvent,
   centerPoint,
   shuffleQuestions,
@@ -29,20 +30,18 @@ export default class Survey extends React.Component {
 
     if (process.browser) {
       this.db = new Database(window);
+      this.actions = new Actions(window);
     }
 
-   let [ primary, secondary ] = shuffleQuestions();
-   let firstQuestion = primary[0];
+    let firstQuestion = this.actions.nextQuestion();
 
     this.events = [];
     this.state = {
       saving: false,
-      primaryQuestions: primary,
-      secondaryQuestions: secondary,
+      reset: false,
       question: 0,
       ranges: firstQuestion,
       data: centerPoint(firstQuestion), // TODO: rename
-      reset: false,
       selfTotal: 0,
       otherTotal: 0
     };
@@ -67,7 +66,9 @@ export default class Survey extends React.Component {
   }
 
   onInstructionEvent = type => {
-    const event_ = createEvent("survey", type, { question: this.state.question });
+    const event_ = createEvent("survey", type, {
+      question: this.state.question
+    });
     this.events.push(event_);
   }
 
@@ -75,48 +76,14 @@ export default class Survey extends React.Component {
     ev.preventDefault();
     this.db
       .saveAnswer(this.state)
-      .then(doc => { this.nextAction(); });
-  }
-
-  nextAction = () => {
-    const nextQuestion = this.state.question + 1;
-    // If the user has completed the first questions in the survey
-    // compute the svo and redirect if they aren't prosocial
-    if (nextQuestion == 6) {
-      this.db
-        .saveSVO(this.state, this.events)
-        .then(doc => {
-          if (doc.type !== "prosocial") {
-            window.location = "/results";
-          }
-        });
-    }
-
-    // If they are prosocial, move to the secondary questions
-    if (nextQuestion != 15 && !this.state.saving) {
-      const ranges = getQuestion(
-        this.state.question,
-        this.state.primaryQuestions,
-        this.state.secondaryQuestions
-      );
-
-      this.setState({
-        startedAt: new Date(),
-        question: nextQuestion,
-        ranges: ranges,
-        data: centerPoint(ranges),
-        reset: true,
-        selfTotal: this.state.selfTotal + this.state.data[0],
-        otherTotal: this.state.otherTotal + this.state.data[1]
+      .then(doc => {
+        this.actions.nextAction(
+          this.db,
+          this.state,
+          this.events,
+          this
+        );
       });
-    } else {
-    // If they've completed the secondary questions
-    // redirect to the results page
-      this.db
-        .saveSecondaryType(this.state)
-        .then(doc => { window.location = "/results";})
-        .catch(e => console.log(e));
-    }
   }
 
   render() {
