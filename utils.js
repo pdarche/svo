@@ -7,7 +7,8 @@ import {
   OTHER_GAIN,
   OWN_GAIN,
   MAX_DISTANCES,
-  QUESTIONS,
+  PRIMARY_QUESTIONS,
+  SECONDARY_QUESTIONS,
   FIREBASE_URL
 } from './config';
 
@@ -63,6 +64,25 @@ function computeSecondaryType(answers) {
 }
 
 
+/**
+ * shuffles the questions
+ *
+ */
+function shuffleQuestions() {
+  const primary = _.shuffle(PRIMARY_QUESTIONS).reverse();
+  const secondary = _.shuffle(SECONDARY_QUESTIONS).reverse();
+
+  return [ primary, secondary ]
+}
+
+
+function getQuestion(questionNumber, primary, secondary) {
+  return questionNumber < 6
+    ? primary.pop()
+    : secondary.pop()
+}
+
+
 
 /**
  * Helper function for creating tracked events
@@ -90,6 +110,7 @@ function Database(window) {
   this.window = window
 }
 
+
 Database.prototype.createSession = function() {
   // We use local storage here because the pouchdb is only initialized
   // when the slider measure survey is started. TODO: fix this.
@@ -114,11 +135,13 @@ Database.prototype.createSession = function() {
   return _id
 }
 
+
 Database.prototype.getResponse = function(sessionId) {
   return this.db
     .get(sessionId)
     .catch(err => console.log(err));
 }
+
 
 Database.prototype.createAnswer = function(state) {
   const submittedAt = new Date();
@@ -134,6 +157,7 @@ Database.prototype.createAnswer = function(state) {
   }
 }
 
+
 Database.prototype.saveAnswer = function(state) {
   const answer = this.createAnswer(state);
   return this.getResponse(state.sessionId)
@@ -144,7 +168,8 @@ Database.prototype.saveAnswer = function(state) {
     .catch(err => console.log(err));
 }
 
-Database.prototype.saveSVO = function(state) {
+
+Database.prototype.saveSVO = function(state, events) {
   const selfTotal = state.selfTotal + state.data[0];
   const otherTotal = state.otherTotal + state.data[1];
   const svo = computeSVO(selfTotal, otherTotal);
@@ -157,7 +182,7 @@ Database.prototype.saveSVO = function(state) {
       doc.type = type;
       doc.selfTotal = selfTotal;
       doc.otherTotal = otherTotal;
-      doc.events = this.events;
+      doc.events = events;
       return this.db.put(doc);
     })
     .then(res => {
@@ -192,15 +217,30 @@ Database.prototype.sync = function(sessionId) {
 }
 
 Database.prototype.destroy = function(window) {
-  this.db.destroy()
+  this.db.destroy();
   window.localStorage.removeItem("sessionId")
+  window.localStorage.removeItem("preSurvey")
   //this.setState({ synced: true })
 }
+
+/**
+ * Actions object for saving svo information
+ *
+ */
+function Actions() {
+  let [ primary, secondary ] = shuffleQuestions();
+  this.question = 0;
+  this.primary = primary;
+  this.secondary = secondary;
+}
+
 
 
 export {
   Database,
   createEvent,
+  shuffleQuestions,
+  getQuestion,
   centerPoint,
   classifySVO,
   computeSVO,

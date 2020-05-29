@@ -34,7 +34,6 @@ export default class ResultsPage extends React.Component {
     // Get the SVO score to show the user
     let doc = this.db.getResponse(sessionId)
       .then(doc => {
-        console.log(doc)
         this.setState({
           svo: Math.round(doc.svo),
           type: doc.type,

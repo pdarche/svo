@@ -16,7 +16,9 @@ import {
 import {
   Database,
   createEvent,
-  centerPoint
+  centerPoint,
+  shuffleQuestions,
+  getQuestion
 } from "../utils";
 import { styles } from "../styles/surveyComponent";
 
@@ -29,12 +31,17 @@ export default class Survey extends React.Component {
       this.db = new Database(window);
     }
 
+   let [ primary, secondary ] = shuffleQuestions();
+   let firstQuestion = primary[0];
+
     this.events = [];
     this.state = {
       saving: false,
+      primaryQuestions: primary,
+      secondaryQuestions: secondary,
       question: 0,
-      ranges: QUESTIONS[0],
-      data: [85, 50], // TODO: rename
+      ranges: firstQuestion,
+      data: centerPoint(firstQuestion), // TODO: rename
       reset: false,
       selfTotal: 0,
       otherTotal: 0
@@ -67,8 +74,8 @@ export default class Survey extends React.Component {
   handleClick = ev => {
     ev.preventDefault();
     this.db
-        .saveAnswer(this.state)
-        .then(doc => { this.nextAction(); });
+      .saveAnswer(this.state)
+      .then(doc => { this.nextAction(); });
   }
 
   nextAction = () => {
@@ -77,16 +84,21 @@ export default class Survey extends React.Component {
     // compute the svo and redirect if they aren't prosocial
     if (nextQuestion == 6) {
       this.db
-          .saveSVO(this.state)
-          .then(doc => {
-            if (doc.type !== "prosocial") {
-              window.location = "/results";
-            }
-          });
+        .saveSVO(this.state, this.events)
+        .then(doc => {
+          if (doc.type !== "prosocial") {
+            window.location = "/results";
+          }
+        });
     }
+
     // If they are prosocial, move to the secondary questions
     if (nextQuestion != 15 && !this.state.saving) {
-      const ranges = QUESTIONS[nextQuestion];
+      const ranges = getQuestion(
+        this.state.question,
+        this.state.primaryQuestions,
+        this.state.secondaryQuestions
+      );
 
       this.setState({
         startedAt: new Date(),
