@@ -4,11 +4,7 @@ import ReactModal from "react-modal";
 import Meta from "../components/Meta";
 import Nav from "../components/Nav";
 import Survey from "../components/Survey";
-
-import {
-  INCLUDE_SURVEY,
-  SURVEY_JSON
-} from "../config";
+import { INCLUDE_SURVEY, SURVEY_JSON } from "../config";
 import { styles } from '../styles/survey';
 
 

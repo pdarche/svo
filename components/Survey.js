@@ -12,15 +12,9 @@ import {
   MAX_DISTANCES,
   QUESTIONS
 } from "../config";
-
-import {
-  Database,
-  Actions,
-  createEvent,
-  centerPoint,
-  shuffleQuestions,
-  getQuestion
-} from "../utils";
+import { createEvent, centerPoint } from "../utils/utils";
+import { Actions } from "../utils/actions";
+import { Database } from "../utils/db";
 import { styles } from "../styles/surveyComponent";
 
 

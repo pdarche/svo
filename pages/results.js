@@ -6,7 +6,7 @@ import Nav from "../components/Nav";
 import Results from "../components/Results";
 import { ANALYTICS_TRACKING_ID, FIREBASE_URL } from '../config'
 import { styles } from "../styles/results";
-import { Database } from "../utils";
+import { Database } from "../utils/db";
 
 
 export default class ResultsPage extends React.Component {
