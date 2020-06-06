@@ -41,7 +41,8 @@ function computeSVO(selfTotal, otherTotal) {
 
 
 function computeSecondaryType(answers) {
-  let secondaryMeasures = answers.map((answer, ix) => {
+  let secondaryMeasures = answers.map((answer) => {
+    const ix = answer.ranges.question - 6 // adjust question #'s to match indices
     let dia = Math.abs(answer.self - EQUALITY_POINTS[ix]) / MAX_DISTANCES[ix]
     let djg = JOINT_GAIN_POINTS[ix]
       ? Math.abs(answer.self - JOINT_GAIN_POINTS[ix]) / MAX_DISTANCES[ix]
@@ -52,6 +53,7 @@ function computeSecondaryType(answers) {
   })
   let transposed = _.unzip(secondaryMeasures)
   let [dia, djg, dal, dic] = transposed.map(a => _.sum(a) / 9)
+
   let ia;
   if (dia <= dal && dia <= dic && djg <= dal && djg <= dic) {
     ia = dia / (dia + djg)
