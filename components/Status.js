@@ -7,6 +7,7 @@ import { styles } from "../styles/status";
 export default class Status extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { info: false };
     if (process.browser) {
       ReactGA.initialize(ANALYTICS_TRACKING_ID);
@@ -69,7 +70,7 @@ export default class Status extends React.Component {
 
         <div className="heading">
           <h1>
-            Task {this.props.n} of 15
+            Task {this.props.n}
           </h1>
           <span onClick={this.openModal}>
             instructions
@@ -93,4 +94,3 @@ const content = {
   height: "250px",
   font: "18px sans-serif"
 };
-

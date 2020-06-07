@@ -27,8 +27,8 @@ export default class ResultsPage extends React.Component {
     const sessionId = window.localStorage.getItem("sessionId");
 
     if (!sessionId) {
-      confirm("Sorry, you must take the survey before reviewing results")
-      window.location = "/survey"
+      confirm("Sorry, you must take the survey before reviewing results");
+      window.location = "/survey";
     }
 
     // Get the SVO score to show the user
