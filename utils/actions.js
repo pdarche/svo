@@ -15,43 +15,58 @@ function Actions(window) {
   this.window = window
 }
 
-Actions.prototype.nextQuestion = function() {
-  return this.question < 6
-    ? this.primary.pop()
-    : this.secondary.pop()
+Actions.prototype.getQuestion = function(question) {
+  return question < 6
+    ? this.primary[question]
+    : this.secondary[question - 6]
 }
 
-Actions.prototype.nextAction = function(db, state, events, component) {
+Actions.prototype.nextAction = function() {
   this.question = this.question + 1;
+  return this.nextState();
+}
 
+Actions.prototype.nextState = function() {
   if (this.question == 6) {
-    db.saveSVO(state, events)
-      .then(doc => {
-        if (doc.type !== "prosocial") {
-          window.location = "/results";
-        }
-      });
-  }
-
-  if (this.question != 15 && !state.saving) {
-    const ranges = this.nextQuestion();
-    // TODO: this should be in a callback
-    component.setState({
-      startedAt: new Date(),
-      question: this.question,
-      ranges: ranges,
-      data: centerPoint(ranges),
-      reset: true,
-      selfTotal: state.selfTotal + state.data[0],
-      otherTotal: state.otherTotal + state.data[1]
-    });
+    return 'save_svo'
+  } else if (this.question != 15) {
+    return 'increment_question'
   } else {
-    // If they've completed the secondary questions
-    // redirect to the results page
-    db.saveSecondaryType(state)
-      .then(doc => { window.location = "/results";})
-      .catch(e => console.log(e));
+    return 'save_secondary_type'
   }
+}
+
+Actions.prototype.incrementQuestion = function(component, state) {
+  const ranges = this.getQuestion(this.question);
+
+  component.setState({
+    startedAt: new Date(),
+    question: this.question,
+    ranges: ranges,
+    data: centerPoint(ranges),
+    reset: true,
+    selfTotal: state.selfTotal + state.data[0],
+    otherTotal: state.otherTotal + state.data[1]
+  });
+
+}
+
+Actions.prototype.saveSVO = function(db, state, events, component) {
+  db.saveSVO(state, events)
+    .then(doc => {
+      if (doc.type !== "prosocial") {
+        window.location = "/results";
+      } else {
+        this.incrementQuestion(component, state);
+      }
+    })
+    .catch(e => console.log(e));
+}
+
+Actions.prototype.saveSecondaryMeasures = function(db, state) {
+  db.saveSecondaryType(state)
+    .then(doc => { window.location = "/results";})
+    .catch(e => console.log(e));
 }
 
 export { Actions }

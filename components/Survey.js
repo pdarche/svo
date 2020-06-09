@@ -19,7 +19,7 @@ export default class Survey extends React.Component {
       this.actions = new Actions(window);
     }
 
-    let firstQuestion = this.actions.nextQuestion();
+    let firstQuestion = this.actions.getQuestion(0);
 
     this.events = [];
     this.state = {
@@ -63,12 +63,19 @@ export default class Survey extends React.Component {
     this.db
       .saveAnswer(this.state)
       .then(doc => {
-        this.actions.nextAction(
-          this.db,
-          this.state,
-          this.events,
-          this
-        );
+        switch (this.actions.nextAction()) {
+          case 'increment_question':
+            this.actions.incrementQuestion(this, this.state);
+            break
+          case 'save_svo':
+            this.actions.saveSVO(this.db, this.state, this.events, this);
+            break
+          case 'save_secondary_type':
+            this.actions.saveSecondaryMeasures(this.db, this.state);
+            break
+          default:
+            console.log("Sorry, something went wrong");
+        }
       });
   }
 
