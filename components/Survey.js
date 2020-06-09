@@ -4,14 +4,6 @@ import Status from "./Status";
 import Slider from "./Slider";
 import Bar from "./Bar";
 import Label from "./Label";
-import {
-  EQUALITY_POINTS,
-  JOINT_GAIN_POINTS,
-  OTHER_GAIN,
-  OWN_GAIN,
-  MAX_DISTANCES,
-  QUESTIONS
-} from "../config";
 import { createEvent, centerPoint } from "../utils/utils";
 import { Actions } from "../utils/actions";
 import { Database } from "../utils/db";
