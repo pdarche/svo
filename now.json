@@ -1,0 +1,13 @@
+{
+    "alias": "svo",
+    "files": [
+      "index.js",
+      "pages/",
+      "components/",
+      "styles/",
+      "static/",
+      "utils/",
+      "config.js"
+    ], 
+    "version": 2
+}
