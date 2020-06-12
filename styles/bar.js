@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'
 
-export const styles = css`
+export const styles = css.global`
   .bar-container2 {
     border: 1px solid #ccc;
     margin: 0px 20px 0px 0px;
@@ -27,4 +27,4 @@ export const styles = css`
     font: 10px sans-serif;
     alignment-baseline: central
   }
-` 
+`

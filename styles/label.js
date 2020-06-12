@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'
 
-export const styles = css`
+export const styles = css.global`
   .label-container {
     display: flex;
     flex-direction: column;

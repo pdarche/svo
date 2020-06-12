@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'
 
-export const styles = css`
+export const styles = css.global`
   .slider-container2 {
     display: flex;
     justify-content: center;

@@ -8,7 +8,7 @@ export const styles = css`
     align-items: center;
     height: 90vh;
   }
-  
+
   .results h1 {
     width: 500px;
     font: 30px sans-serif;
@@ -16,20 +16,20 @@ export const styles = css`
     margin-bottom: 5px;
     text-align: center;
   }
-  
+
   .results .description {
     margin: 5px 0px 25px 0px;
     width: 500px;
   }
-  
+
   .results-container p {
     font: 16px sans-serif;
   }
-  
+
   .results-container div {
     margin: 0px;
   }
-  
+
   .content {
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@ export const styles = css`
     width: 960px;
     height: 500px;
   }
-  
+
   .survey-info {
     display: flex;
     flex-direction: row;
@@ -47,7 +47,7 @@ export const styles = css`
     margin: 10px 0px;
     width: 500px;
   }
-  
+
   .survey-info p {
     font-size: 12px;
     color: #333

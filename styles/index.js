@@ -8,7 +8,7 @@ export const styles = css`
     align-items: center;
     height: 90vh;
   }
-  
+
   h1 {
     width: 500px;
     font: 35px sans-serif;
@@ -38,7 +38,7 @@ export const styles = css`
     text-align: center;
     border-radius: 10px;
   }
-  
+
   .button a {
     padding: 30px;
     font: 14px sans-serif;
@@ -46,7 +46,7 @@ export const styles = css`
     margin: 0px auto;
     text-decoration: none;
   }
-  
+
   .button a:hover {
     cursor: pointer;
   }
