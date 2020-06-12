@@ -44,7 +44,9 @@ export default class Survey extends React.Component {
       selfStart: this.state.data[0],
       self: value[0],
       otherStart: this.state.data[1],
-      other: value[1]
+      other: value[1],
+      questionNumber: this.state.question,
+      questionIx: this.state.ranges.question
     });
 
     this.events.push(event_);
@@ -53,7 +55,8 @@ export default class Survey extends React.Component {
 
   onInstructionEvent = type => {
     const event_ = createEvent("survey", type, {
-      question: this.state.question
+      questionNumber: this.state.question,
+      questionIx: this.state.ranges.question
     });
     this.events.push(event_);
   }
