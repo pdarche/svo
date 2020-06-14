@@ -1,11 +1,11 @@
 ## SVO Slider App
-A self-contained web application for administering the [Social Value Orientation Slider Measure](http://ryanomurphy.com/resources/Murphy-Ackermann-Handgraaf-2011.pdf) focused on ease-of-use, scalability, information richness. 
+A self-contained web application for administering the [Social Value Orientation Slider Measure](http://ryanomurphy.com/resources/Murphy-Ackermann-Handgraaf-2011.pdf) focused on ease-of-use, scalability, information richness. Preview the app at https://svo.pdarche.now.sh.
 
 ### Features
- - Full, configurable implementation of Murphy et al. 2011's semi-continuous web-based Social Value Orientation Slider Measure
+ - Full, configurable implementation of [Murphy et al. 2011's](http://ryanomurphy.com/resources/Murphy-Ackermann-Handgraaf-2011.pdf) semi-continuous web-based Social Value Orientation Slider Measure
  - Optional, configurable pre-survey using [survey.js](https://surveyjs.io/)
  - Detailed event tracking providing information about the response process
- - Uses [Vercel](https://vercel.com/) and [Firebase](https://firebase.google.com/), so it's easy to deploy and persist data without servers and at any scale
+ - Uses [Vercel](https://vercel.com/) and [Firebase](https://firebase.google.com/) for easy deployment and data persistence without servers and at any scale
 
 ### Quickstart 
 (Assumes you have [git](https://git-scm.com/), [node](https://nodejs.org/en/), and [npm](https://www.npmjs.com/get-npm) installed, and that you've created a Firebase database.)
