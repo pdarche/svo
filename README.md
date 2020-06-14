@@ -1,5 +1,5 @@
 ## SVO Slider App
-A self-contained web application for administering the [Social Value Orientation Slider Measure](http://ryanomurphy.com/resources/Murphy-Ackermann-Handgraaf-2011.pdf) focused on ease-of-use, scalability, information richness. Preview the app at https://svo.pdarche.now.sh.
+A self-contained web application for administering the [Social Value Orientation Slider Measure](http://ryanomurphy.com/resources/Murphy-Ackermann-Handgraaf-2011.pdf) focused on ease-of-use, scalability, information richness. Preview the app at https://svo.pdarche.vercel.app.
 
 ### Features
  - Full, configurable implementation of [Murphy et al. 2011's](http://ryanomurphy.com/resources/Murphy-Ackermann-Handgraaf-2011.pdf) semi-continuous web-based Social Value Orientation Slider Measure
@@ -45,6 +45,7 @@ Each response yields a single json `Response` object with the following properti
 | `isConsistent` | `Boolean` | Computed measure of whether the respondent's answers were consistent given their SVO type. See Murphy 2011 for more details |
 | `otherTotal` | Number | The sum of the allocation to Other |
 | `preSurvey` | `Object` | Answers to the pre-survey, if implemented |
+| `secondaryMeasures` | `Object` | Object with secondary measures computed for prosocial responses (if configured) |
 | `selfTotal` | `Number` | The sum of allocations to Self |
 | `startedAt` | `DateTime` | DateTime of when the first question began. Only applies to SVO items, not pre-survey items |
 | `svo` | `Number` | The computed SVO angle for the response |
