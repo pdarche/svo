@@ -7,8 +7,7 @@ import {
   OWN_GAIN,
   MAX_DISTANCES,
   PRIMARY_QUESTIONS,
-  SECONDARY_QUESTIONS,
-  FIREBASE_URL
+  SECONDARY_QUESTIONS
 } from '../config';
 
 
@@ -31,12 +30,43 @@ function classifySVO(svo) {
 }
 
 
-function computeSVO(selfTotal, otherTotal) {
-  let selfAvg = (selfTotal / 6) - 50
-  let otherAvg = (otherTotal / 6) - 50
-  let ratio = otherAvg / selfAvg
-  let svo = Math.atan(ratio) * 180 / Math.PI
-  return svo
+function computeSVO(selfTotal, otherTotal, denominator=6) {
+  const selfAvg = (selfTotal / denominator) - 50
+  const otherAvg = (otherTotal / denominator) - 50
+  const ratio = otherAvg / selfAvg
+  const svo = Math.atan(ratio) * (180 / Math.PI)
+  // Round to the nearest 2 decimal places
+  const roundedSVO = Number(svo).toFixed(2)
+  return roundedSVO
+}
+
+
+function isConsistent(svo) {
+  let consistent = false;
+
+  switch (classifySVO(svo)) {
+    case 'prosocial':
+      if (svo >= 37.09 && svo <= 52.91) {
+        consistent = true
+      }
+      break
+    case 'individualistic':
+      if (svo >= -7.82 && svo <= 7.82) {
+        consistent = true
+      }
+      break
+    case 'altruistic':
+      if (svo >= 61.39) {
+        consistent = true
+      }
+      break
+    case 'competitive':
+      if (svo <= -16.26) {
+        consistent = true
+      }
+      break
+  }
+  return consistent
 }
 
 
@@ -97,6 +127,7 @@ export {
   shuffleQuestions,
   centerPoint,
   classifySVO,
+  isConsistent,
   computeSVO,
   computeSecondaryType
 }

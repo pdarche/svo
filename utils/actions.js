@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import hat from "hat";
 import { shuffleQuestions, centerPoint } from "./utils";
+import { PRIMARY_QUESTIONS, SECONDARY_QUESTIONS, RANDOMIZE_QUESTIONS } from "../config";
 
 /**
  * Actions object for saving svo information
@@ -8,7 +9,14 @@ import { shuffleQuestions, centerPoint } from "./utils";
  */
 
 function Actions(window) {
-  let [ primary, secondary ] = shuffleQuestions();
+  let primary, secondary;
+  if (RANDOMIZE_QUESTIONS) {
+    [ primary, secondary ] = shuffleQuestions();
+  } else {
+    primary = PRIMARY_QUESTIONS;
+    secondary = SECONDARY_QUESTIONS;
+  }
+
   this.question = 0;
   this.primary = primary;
   this.secondary = secondary;

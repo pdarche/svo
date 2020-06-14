@@ -5,7 +5,8 @@ import { FIREBASE_URL } from "../config";
 import {
   computeSVO,
   classifySVO,
-  computeSecondaryType
+  computeSecondaryType,
+  isConsistent
 } from "./utils";
 
 /**
@@ -53,6 +54,7 @@ Database.prototype.getResponse = function(sessionId) {
 
 Database.prototype.createAnswer = function(state) {
   const submittedAt = new Date();
+
   return {
     _id: hat(),
     sessionId: state.sessionId,
@@ -82,12 +84,14 @@ Database.prototype.saveSVO = function(state, events) {
   const otherTotal = state.otherTotal + state.data[1];
   const svo = computeSVO(selfTotal, otherTotal);
   const type = classifySVO(svo);
+  const consistent = isConsistent(svo);
 
   return this.getResponse(state.sessionId)
     .then(doc => {
       doc.completedAt = new Date();
       doc.svo = svo;
       doc.type = type;
+      doc.isConsistent = consistent;
       doc.selfTotal = selfTotal;
       doc.otherTotal = otherTotal;
       doc.events = events;

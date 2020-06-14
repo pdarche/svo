@@ -35,7 +35,7 @@ export default class ResultsPage extends React.Component {
     let doc = this.db.getResponse(sessionId)
       .then(doc => {
         this.setState({
-          svo: Math.round(doc.svo),
+          svo: doc.svo,
           type: doc.type,
           sessionId: sessionId
         });
