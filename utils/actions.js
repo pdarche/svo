@@ -1,7 +1,12 @@
 import _ from 'lodash'
 import hat from "hat";
 import { shuffleQuestions, centerPoint } from "./utils";
-import { PRIMARY_QUESTIONS, SECONDARY_QUESTIONS, RANDOMIZE_QUESTIONS } from "../config";
+import {
+  PRIMARY_QUESTIONS,
+  SECONDARY_QUESTIONS,
+  RANDOMIZE_QUESTIONS,
+  INCLUDE_SECONDARY
+} from "../config";
 
 /**
  * Actions object for saving svo information
@@ -62,7 +67,7 @@ Actions.prototype.incrementQuestion = function(component, state) {
 Actions.prototype.saveSVO = function(db, state, events, component) {
   db.saveSVO(state, events)
     .then(doc => {
-      if (doc.type !== "prosocial") {
+      if (doc.type !== "prosocial" || !INCLUDE_SECONDARY) {
         window.location = "/results";
       } else {
         this.incrementQuestion(component, state);
