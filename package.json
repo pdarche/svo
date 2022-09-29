@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "d3": "^4.11.0",
+    "d3": "^7.6.1",
     "hat": "0.0.3",
     "lodash": "^4.17.4",
     "next": "^9.4.4",
